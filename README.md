@@ -1,4 +1,4 @@
-# 🔥 Make your Data and Models Interactive with Panel
+# 🔬 Introduction to Panel
 
 Panel is a very powerful framework for exploratory data analysis and for creating data science apps in Python.
 
