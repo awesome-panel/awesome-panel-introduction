@@ -18,6 +18,11 @@ _LOGOS = {
 _MENU_FILE = pathlib.Path(__file__).parent / "menu.html"
 _MENU_TEXT = _MENU_FILE.read_text()
 
+_ACE_THEMES={
+    "default": "chrome",
+    "dark": "tomorrow_night_eighties"
+}
+
 class Configuration(param.Parameterized):
     theme = param.String()
     site = param.String(default="Highly Interactive Data Apps with Panel")
@@ -26,8 +31,14 @@ class Configuration(param.Parameterized):
     header_color = param.Color()
     header_accent_base_color = param.Color("white")
     header_background = param.Color()
+    ace_theme=param.String()
 
     def __init__(self, random=False, **params):
+        """Configuration for your (Fast) Template
+
+        Args:
+            random (bool, optional): Whether or not to provide randomized values. Defaults to False.
+        """
         super().__init__(**params)
 
         self.theme = self._get_theme()
@@ -42,6 +53,7 @@ class Configuration(param.Parameterized):
         self.header_background = self.accent_base_color
 
         self.logo=_LOGOS[self.theme]
+        self.ace_theme=_ACE_THEMES[self.theme]
 
     def _get_theme(self):
         if pn.template.FastListTemplate().theme==pn.template.DarkTheme:

@@ -1,0 +1,3 @@
+panel
+jupyterlab
+jupyter-bokeh
