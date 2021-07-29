@@ -10,19 +10,20 @@ pn.extension(sizing_mode="stretch_width")
 
 COLOR_MAPS = {
     "Autumn": cm.autumn,
-    'Spring': cm.spring,
-    'Summer': cm.summer,
-    'Winter': cm.winter,
+    "Spring": cm.spring,
+    "Summer": cm.summer,
+    "Winter": cm.winter,
 }
+
 
 def get_plot(cmap="autumn", theme="default"):
     plt.style.use("default")
-    if theme=="dark":
+    if theme == "dark":
         plt.style.use("dark_background")
     Y, X = np.mgrid[-3:3:100j, -3:3:100j]
-    U = -1 - X**2 + Y
-    V = 1 + X - Y**2
-    speed = np.sqrt(U*U + V*V)
+    U = -1 - X ** 2 + Y
+    V = 1 + X - Y ** 2
+    speed = np.sqrt(U * U + V * V)
 
     fig0 = Figure(figsize=(12, 6))
     ax0 = fig0.subplots()
@@ -35,11 +36,11 @@ def get_plot(cmap="autumn", theme="default"):
 
 
 select = pn.widgets.Select(name="Color Map", options=list(COLOR_MAPS.keys()))
-get_plot_interactive=pn.bind(get_plot, cmap=select, theme="default")
+get_plot_interactive = pn.bind(get_plot, cmap=select, theme="default")
 
-component=pn.Column(
-    "# Example",
+component = pn.Column(
     select,
     pn.panel(get_plot_interactive, sizing_mode="stretch_both", loading_indicator=True),
-    sizing_mode="stretch_both"
+    sizing_mode="stretch_both",
 )
+component
