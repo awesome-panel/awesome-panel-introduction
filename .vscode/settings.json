@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": ".venv\\Scripts\\python.exe",
+    "python.pythonPath": ".venv2\\Scripts\\python.exe",
     "jupyter.jupyterServerType": "local"
 }
