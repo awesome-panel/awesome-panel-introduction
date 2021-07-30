@@ -1,7 +1,9 @@
-import param
-import panel as pn
 import pathlib
 import random
+import sys
+
+import panel as pn
+import param
 
 _COLORS = [
     ("#00A170", "white"),
@@ -23,14 +25,46 @@ _ACE_THEMES={
     "dark": "tomorrow_night_eighties"
 }
 
+RAW_CSS = """
+.sidenav .menu-item-active a {
+    background: var(--accent-fill-active);
+    color: white;
+}
+"""
+if not RAW_CSS in pn.config.raw_css:
+    pn.config.raw_css.append(RAW_CSS)
+
+def _mock_panel():
+    def _reload(module=None):
+        if module is not None:
+            for module in pn.io.reload._modules:
+                if module in sys.modules:
+                    del sys.modules[module]
+        for cb in pn.io.reload._callbacks.values():
+            cb.stop()
+        pn.io.reload._callbacks.clear()
+        if pn.state.location:
+            pn.state.location.reload = True
+        for loc in pn.state._locations.values():
+            loc.reload = True
+
+    pn.io.reload._reload = _reload
+
+_mock_panel()
+#tests
+
 class Configuration(param.Parameterized):
     theme = param.String()
     site = param.String(default="Highly Interactive Data Apps with Panel")
+    title = param.String()
+    url = param.String()
     logo = param.String()
     accent_base_color = param.Color()
     header_color = param.Color()
     header_accent_base_color = param.Color("white")
     header_background = param.Color()
+    main_max_width = param.String("95%")
+    sidebar_width = param.Integer(400)
     ace_theme=param.String()
 
     def __init__(self, random=False, **params):
@@ -88,10 +122,16 @@ class Configuration(param.Parameterized):
     @property
     def menu(self) -> str:
         """Returns a HTML Menu"""
-        return _MENU_TEXT.replace("{ COLLAPSED_ICON }", self._collapsed_icon).replace("{ EXPANDED_ICON }", self._expanded_icon)
+        test=f'<li><a href="{ self.url }">{ self.title }</a></li>'
+        return (
+            _MENU_TEXT
+            .replace("{ COLLAPSED_ICON }", self._collapsed_icon)
+            .replace("{ EXPANDED_ICON }", self._expanded_icon)
+            .replace(f'<li><a href="{ self.url }">{ self.title }</a></li>', f'<li class="menu-item-active"><a href="{ self.url }">{ self.title }</a></li>')
+        )
 
 if __name__.startswith("bokeh"):
-    config=Configuration()
+    config = Configuration(title="Works in your Notebook and IDE", url="works_in_notebook_and_ide", random=True)
     pn.template.FastListTemplate(
         title="Test Configuration",
         site=config.site,

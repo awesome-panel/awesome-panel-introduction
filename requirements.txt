@@ -1,3 +1,5 @@
 panel
 jupyterlab
 jupyter-bokeh
+matplotlib
+pandas
