@@ -4,7 +4,9 @@ THIS REPO IS WORK IN PROGRESS. PRE-ALPHA
 
 [Panel](https://panel.holoviz.org) is a very powerful framework for exploratory data analysis and for creating beautiful data science apps in Python.
 
-This repository contains code and other material to support introductory talks, training and videos on Panel. See below.
+This repository contains code and other material to support introductory talks, training and videos on Panel.
+
+![Awesome Panel Introduction - Tour](https://github.com/MarcSkovMadsen/awesome-panel-introduction/blob/main/assets/videos/awesome-panel-introduction-tour.gif?raw=true)
 
 Check it out
 
