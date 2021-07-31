@@ -3,3 +3,12 @@ jupyterlab
 jupyter-bokeh
 matplotlib
 pandas
+altair
+vega_datasets
+scipy
+holoviews
+hvplot
+ipywidgets_bokeh
+plotly
+plotnine
+seaborn

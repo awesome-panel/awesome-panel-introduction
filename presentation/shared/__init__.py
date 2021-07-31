@@ -10,6 +10,7 @@ _COLORS = [
     ("#DAA520", "white"),
     ("#2F4F4F", "white"),
     ("#F08080", "white"),
+    ("#4099da", "white"), # lightblue
 ]
 _LOGOS = {
     "default": "https://panel.holoviz.org/_static/logo_stacked.png",
@@ -130,8 +131,18 @@ class Configuration(param.Parameterized):
             .replace(f'<li><a href="{ self.url }">{ self.title }</a></li>', f'<li class="menu-item-active"><a href="{ self.url }">{ self.title }</a></li>')
         )
 
+    def get_logo_pane(self, **params):
+        return pn.pane.PNG(
+            self.logo,
+            link_url="https://panel.holoviz.org",
+            embed=False,
+            sizing_mode="fixed",
+            align="center",
+            **params
+        )
+
 if __name__.startswith("bokeh"):
-    config = Configuration(title="Works in your Notebook and IDE", url="works_in_notebook_and_ide", random=True)
+    config = Configuration(title="Works in your Notebook and IDE", url="works_in_your_notebook_and_ide", random=True)
     pn.template.FastListTemplate(
         title="Test Configuration",
         site=config.site,
