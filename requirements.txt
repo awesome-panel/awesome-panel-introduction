@@ -3,7 +3,7 @@ holoviews
 hvplot
 ipywidgets_bokeh
 jupyter-bokeh
-jupyter-panel-proxy
+jupyter-panel-proxy==0.2.0a2
 jupyterlab
 matplotlib
 pandas
