@@ -1,0 +1,2 @@
+conda install -c conda-forge code-server
+code-server --install-extension ms-python.python
