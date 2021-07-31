@@ -1,0 +1,3 @@
+---
+apps: presentation/*.py
+exclude_patterns: __init__.py

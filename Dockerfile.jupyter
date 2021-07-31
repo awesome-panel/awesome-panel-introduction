@@ -1,0 +1,11 @@
+FROM python:3.7.4-slim-stretch
+
+EXPOSE 8889
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+ADD requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
+ADD . .
+RUN jupyter serverextension enable panel.io.jupyter_server_extension
+ENTRYPOINT [ "jupyter", "lab", "--port", "8889", "--no-browser", "--ip", "0.0.0.0", "--allow-root", "--NotebookApp.token", ""]
