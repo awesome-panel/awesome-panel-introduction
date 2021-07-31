@@ -4,11 +4,17 @@ Panel is a very powerful framework for exploratory data analysis and for creatin
 
 This repository contains code and other material to support introductory talks, training and videos on Panel. See below.
 
+Check out the presentation
+
+| Notebooks | App |
+|------|--------------|
+| [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/awesome-panel-introduction/main?urlpath=lab/tree/presentation) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/awesome-panel-introduction/main?urlpath=panel/introduction) |
+
 THIS REPO IS WORK IN PROGRESS. PRE-ALPHA
 
 ## Videos
 
-- Make you Data and Models Interactive with Panel. COMING UP
+- Highly Interactive Data Apps with Panel
 
 ## Installation
 

@@ -4,6 +4,7 @@ hvplot
 ipywidgets_bokeh
 jupyter-bokeh
 jupyter-panel-proxy==0.2.0a2
+jupyter-server-proxy
 jupyterlab
 matplotlib
 pandas
