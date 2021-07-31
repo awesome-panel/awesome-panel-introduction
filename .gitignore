@@ -130,4 +130,5 @@ dmypy.json
 Dockerfile
 .venv2/
 videos/
+!assets/videos
 .vscode/settings.json
