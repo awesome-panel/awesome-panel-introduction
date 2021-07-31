@@ -9,5 +9,6 @@ WORKDIR /app
 ADD requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 ADD . .
+ADD logo.svg /usr/local/lib/python3.7/site-packages/panel_server/icons/
 RUN jupyter serverextension enable panel.io.jupyter_server_extension
 ENTRYPOINT [ "jupyter", "lab", "--port", "8889", "--no-browser", "--ip", "0.0.0.0", "--allow-root", "--NotebookApp.token", ""]
