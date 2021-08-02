@@ -31,6 +31,7 @@ ipywidget = components.IPyWidget()
 matplotlib = components.Matplotlib()
 plotly = components.Plotly()
 plotnine = components.Plotnine()
+pydeck = components.PyDeck()
 seaborn = components.Seaborn()
 vega = components.Vega()
 
@@ -45,6 +46,7 @@ TOOLS = {
     "MATPLOTLIB": matplotlib,
     "PLOTLY": plotly,
     "PLOTNINE": plotnine,
+    "PYDECK": pydeck,
     "SEABORN": seaborn,
     "VEGA": vega,
 }

@@ -14,3 +14,4 @@ plotnine
 scipy
 seaborn
 vega_datasets
+pydeck
