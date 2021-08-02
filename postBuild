@@ -1,2 +1,3 @@
 conda install -c conda-forge code-server
+pip install jupyter-vscode-proxy
 code-server --install-extension ms-python.python
