@@ -1,8 +1,7 @@
 import param
 import panel as pn
-
-import altair as alt
-from vega_datasets import data
+import textwrap
+import inspect
 
 class ComponentBase(param.Parameterized):
     component =  param.Parameter()
@@ -11,6 +10,29 @@ class ComponentBase(param.Parameterized):
 
     def example(self, theme="default", accent_base_color="blue"):
         raise NotImplemented("")
+
+    def code(self, accent_base_color="blue"):
+        text = "import panel as pn"
+        text += "\n\n"
+        if self.extension:
+            text += f'pn.extension("{self.extension}", sizing_mode="stretch_both")'
+        else:
+            text += 'pn.extension(sizing_mode="stretch_both")'
+        text += "\n"
+        text += f"""
+color="{accent_base_color}"
+template=pn.template.FastListTemplate(site="Awesome Panel", title="{self.name[0:-5]}", accent_base_color=color, header_background=color, header_accent_base_color="white",)
+theme = 'dark' if template.theme==pn.template.DarkTheme else 'default'
+
+"""
+        text += textwrap.dedent(inspect.getsource(self.example)).replace("self, ","")
+
+        text += f"""
+
+component=example(theme=theme, accent_base_color=color)
+template.main.append(component)
+template.servable()"""
+        return text
 
     def __str__(self):
         return type(self).__name__.upper()
@@ -21,6 +43,9 @@ class Altair(ComponentBase):
     extension = param.String("vega")
 
     def example(self, theme="default", accent_base_color="blue"):
+        import altair as alt
+        from vega_datasets import data
+
         if theme=="dark":
             alt.themes.enable("dark")
         else:
@@ -119,7 +144,7 @@ class DeckGL(ComponentBase):
             ]
         }
 
-        return pn.pane.DeckGL(json_spec, mapbox_api_key=MAPBOX_KEY, sizing_mode='stretch_both', height=400)
+        return pn.pane.DeckGL(json_spec, mapbox_api_key=MAPBOX_KEY, sizing_mode='stretch_both', height=500)
 
 class ECharts(ComponentBase):
     component =  param.Parameter(pn.pane.ECharts)
@@ -143,7 +168,8 @@ class ECharts(ComponentBase):
             }],
             "responsive": True
         }
-        return pn.pane.ECharts(echart, sizing_mode="stretch_both")
+        return pn.pane.ECharts(echart, min_height=500, sizing_mode="stretch_both")
+
 class HoloViews(ComponentBase):
     component =  param.Parameter(pn.pane.HoloViews)
     reference = param.String("https://panel.holoviz.org/reference/panes/HoloViews.html")
@@ -372,7 +398,7 @@ class PyECharts(ComponentBase):
         plot=json.loads(plot.dump_options())
         plot["responsive"]=True
 
-        return pn.pane.ECharts(plot, height=500, sizing_mode="stretch_both", theme=theme)
+        return pn.pane.ECharts(plot, min_height=500, sizing_mode="stretch_both", theme=theme)
 
 class PyVista(ComponentBase):
     component =  param.Parameter(pn.pane.VTK)
@@ -397,8 +423,7 @@ class PyVista(ComponentBase):
             theta_resolution=8, phi_resolution=8,
             center=(0.5, 0.5, 0.5)),color=accent_base_color, smooth_shading=True
         )
-        geo_pan_pv = pn.panel(plotter.ren_win, height=500, sizing_mode="stretch_width")
-        return geo_pan_pv
+        return pn.panel(plotter.ren_win, height=500, sizing_mode="stretch_both")
 
 class Seaborn(ComponentBase):
     component =  param.Parameter(pn.pane.Matplotlib)
@@ -462,7 +487,7 @@ class Vega(ComponentBase):
                     "tickColor": "#fff"
                 }
             }
-        return pn.panel(vegalite, height=400, sizing_mode="stretch_both")
+        return pn.panel(vegalite, height=500, sizing_mode="stretch_both")
 
 class VTK(ComponentBase):
     component =  param.Parameter("pn.pane.VTK")

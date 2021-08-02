@@ -3,8 +3,6 @@ import param
 
 from shared import Configuration
 import components
-import inspect
-import textwrap
 
 RAW_CSS = """
 .bk-root *.bk-btn {
@@ -75,8 +73,7 @@ def reference(component="Altair"):
 
 def code(component="Altair"):
     component = TOOLS[component]
-    value = textwrap.dedent(inspect.getsource(component.example))
-    # value += f"\n\n{component.component.name}"
+    value = component.code(accent_base_color=config.accent_base_color)
 
     return pn.widgets.Ace(
         value=value,
@@ -91,8 +88,10 @@ def code(component="Altair"):
 select = pn.widgets.RadioButtonGroup(
     options=list(TOOLS.keys()), button_type="success", margin=(10, 0, 25, 0)
 )
-
-pn.state.location.sync(select, {"value": "component"})
+try:
+    pn.state.location.sync(select, {"value": "component"})
+except:
+    pass
 
 show = pn.bind(show, component=select)
 reference = pn.bind(reference, component=select)
