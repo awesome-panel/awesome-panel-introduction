@@ -478,8 +478,8 @@ class VTK(ComponentBase):
         # Add the actors to the renderer, set the background and size
         ren.AddActor(cylinderActor)
         if theme=="dark":
-            ren.SetBackground(0, 0, 0)
+            ren.SetBackground(0.13, 0.13, 0.13)
         else:
-            ren.SetBackground(1,1,1)
+            ren.SetBackground(0.97,0.97,0.97)
 
         return pn.pane.VTK(renWin, height=500, sizing_mode="stretch_both")
