@@ -374,6 +374,32 @@ class PyECharts(ComponentBase):
 
         return pn.pane.ECharts(plot, height=500, sizing_mode="stretch_both", theme=theme)
 
+class PyVista(ComponentBase):
+    component =  param.Parameter(pn.pane.VTK)
+    reference = param.String("https://panel.holoviz.org/reference/panes/VTK.html#working-with-pyvista")
+    extension = param.String("vtk")
+
+    def example(self, theme="default", accent_base_color="blue"):
+        import pyvista as pv
+
+        plotter = pv.Plotter() # we define a pyvista plotter
+        if theme=="dark":
+            plotter.background_color = (0.13, 0.13, 0.13)
+        else:
+            plotter.background_color = (0.97,0.97,0.97)
+
+        # we create a `VTK` panel around the render window
+        pvcylinder = pv.Cylinder(resolution=8, direction=(0,1,0))
+        cylinder_actor = plotter.add_mesh(pvcylinder, color=accent_base_color, smooth_shading=True)
+        cylinder_actor.RotateX(30.0)
+        cylinder_actor.RotateY(-45.0)
+        sphere_actor = plotter.add_mesh(pv.Sphere(
+            theta_resolution=8, phi_resolution=8,
+            center=(0.5, 0.5, 0.5)),color=accent_base_color, smooth_shading=True
+        )
+        geo_pan_pv = pn.panel(plotter.ren_win, height=500, sizing_mode="stretch_width")
+        return geo_pan_pv
+
 class Seaborn(ComponentBase):
     component =  param.Parameter(pn.pane.Matplotlib)
     reference = param.String("https://panel.holoviz.org/reference/panes/Matplotlib.html#panes-gallery-matplotlib")

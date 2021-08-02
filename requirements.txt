@@ -17,3 +17,4 @@ vega_datasets
 pydeck
 pyecharts
 vtk
+pyvista

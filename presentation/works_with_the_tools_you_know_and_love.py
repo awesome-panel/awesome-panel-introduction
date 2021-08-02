@@ -8,7 +8,7 @@ import textwrap
 
 RAW_CSS = """
 .bk-root *.bk-btn {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
 }
 """
@@ -32,6 +32,7 @@ plotly = components.Plotly()
 plotnine = components.Plotnine()
 pydeck = components.PyDeck()
 pyecharts = components.PyECharts()
+pyvista = components.PyVista()
 seaborn = components.Seaborn()
 vega = components.Vega()
 vtk = components.VTK()
@@ -49,6 +50,7 @@ TOOLS = {
     "PLOTNINE": plotnine,
     "PYDECK": pydeck,
     "PYECHARTS": pyecharts,
+    "PYVISTA": pyvista,
     "SEABORN": seaborn,
     "VEGA": vega,
     "VTK": vtk,
