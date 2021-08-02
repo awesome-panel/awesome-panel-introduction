@@ -128,21 +128,20 @@ class ECharts(ComponentBase):
 
     def example(self, theme="default", accent_base_color="#A01346"):
         echart = {
-            'tooltip': {},
-            'legend': {
-                'data':['Sales']
+            "xAxis": {
+                "data": ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27']
             },
-            'xAxis': {
-                'data': ["shirt","cardign","chiffon shirt","pants","heels","socks"]
-            },
-            'yAxis': {},
-            'series': [{
-                'name': 'Sales',
-                'type': 'bar',
-                'data': [5, 20, 36, 10, 10, 20],
-                "itemStyle": {"color": accent_base_color},
+            "yAxis": {},
+            "series": [{
+                "type": 'k',
+                "data": [
+                    [20, 34, 10,38],
+                    [40, 35, 30, 50],
+                    [31, 38, 33, 44],
+                    [38, 15, 5, 42],
+                ]
             }],
-            "responsive": True,
+            "responsive": True
         }
         return pn.pane.ECharts(echart, sizing_mode="stretch_both")
 class HoloViews(ComponentBase):
@@ -234,10 +233,11 @@ class Matplotlib(ComponentBase):
         fig0.colorbar(strm.lines)
 
         return pn.pane.Matplotlib(fig0, sizing_mode="stretch_both")
+
 class Plotly(ComponentBase):
     component =  param.Parameter(pn.pane.Plotly)
-    reference = param.String("https://panel.holoviz.org/reference/panes/Plotly.html")
-    plotly = param.String("echarts")
+    reference = param.String("https://panel.holoviz.org/reference/panes/Plotly.html#panes-gallery-plotly")
+    extension = param.String("plotly")
 
     def example(self, theme="default", accent_base_color="blue"):
         import pandas as pd
@@ -258,6 +258,7 @@ class Plotly(ComponentBase):
         fig.layout.autosize = True
 
         return pn.pane.Plotly(fig, config={'responsive': True})
+
 class Plotnine(ComponentBase):
     component =  param.Parameter(pn.pane.Matplotlib)
     reference = param.String("https://panel.holoviz.org/reference/panes/Matplotlib.html#panes-gallery-matplotlib")
@@ -284,8 +285,9 @@ class Plotnine(ComponentBase):
         )
         return plot.draw()
 class PyDeck(ComponentBase):
-    component =  param.Parameter(pn.pane.DeckGL)
+    component = param.Parameter(pn.pane.DeckGL)
     reference = param.String("https://panel.holoviz.org/reference/panes/DeckGL.html#pydeck")
+    extension = param.String("deckgl")
 
     def example(self, theme="default", accent_base_color="blue"):
         import pydeck
@@ -351,6 +353,26 @@ class PyDeck(ComponentBase):
         tooltips = {geojson.id: geojson_tooltip}
 
         return pn.pane.DeckGL(r, tooltips=tooltips, height=600, sizing_mode="stretch_both")
+
+class PyECharts(ComponentBase):
+    component =  param.Parameter(pn.pane.ECharts)
+    reference = param.String("https://panel.holoviz.org/reference/panes/ECharts.html#panes-gallery-echarts")
+    extension = param.String("echarts")
+
+    def example(self, theme="default", accent_base_color="blue"):
+        from pyecharts.charts import Bar
+
+        plot= (Bar()
+            .add_xaxis(['Helicoptors', 'Planes', "Air Ballons"])
+            .add_yaxis('Total In Flight', [50, 75, 25], color=accent_base_color)
+        )
+
+        # Workaround to make plot responsive
+        import json
+        plot=json.loads(plot.dump_options())
+        plot["responsive"]=True
+
+        return pn.pane.ECharts(plot, height=500, sizing_mode="stretch_both", theme=theme)
 
 class Seaborn(ComponentBase):
     component =  param.Parameter(pn.pane.Matplotlib)

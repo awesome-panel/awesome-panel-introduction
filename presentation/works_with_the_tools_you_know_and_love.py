@@ -27,11 +27,11 @@ deckgl = components.DeckGL()
 echarts = components.ECharts()
 holoviews = components.HoloViews()
 hvplot = components.HVPlot()
-ipywidget = components.IPyWidget()
 matplotlib = components.Matplotlib()
 plotly = components.Plotly()
 plotnine = components.Plotnine()
 pydeck = components.PyDeck()
+pyecharts = components.PyECharts()
 seaborn = components.Seaborn()
 vega = components.Vega()
 
@@ -47,6 +47,7 @@ TOOLS = {
     "PLOTLY": plotly,
     "PLOTNINE": plotnine,
     "PYDECK": pydeck,
+    "PYECHARTS": pyecharts,
     "SEABORN": seaborn,
     "VEGA": vega,
 }
