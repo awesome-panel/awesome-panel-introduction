@@ -13,7 +13,7 @@ RAW_CSS = """
 }
 """
 
-pn.extension("vega", "deckgl", "echarts", "ipywidgets", "plotly", sizing_mode="stretch_width")
+pn.extension("vega", "deckgl", "echarts", "plotly", "vtk", sizing_mode="stretch_width")
 
 config = Configuration(
     title="Works with the tools you know and love",
@@ -34,6 +34,7 @@ pydeck = components.PyDeck()
 pyecharts = components.PyECharts()
 seaborn = components.Seaborn()
 vega = components.Vega()
+vtk = components.VTK()
 
 TOOLS = {
     "ALTAIR": altair,
@@ -50,6 +51,7 @@ TOOLS = {
     "PYECHARTS": pyecharts,
     "SEABORN": seaborn,
     "VEGA": vega,
+    "VTK": vtk,
 }
 
 description = """

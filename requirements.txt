@@ -16,3 +16,4 @@ seaborn
 vega_datasets
 pydeck
 pyecharts
+vtk
