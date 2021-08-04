@@ -14,7 +14,7 @@ _COLORS = [
 ]
 _LOGOS = {
     "default": "https://panel.holoviz.org/_static/logo_stacked.png",
-    "dark": "https://panel.holoviz.org/_static/logo_horizontal.png",
+    "dark": "https://raw.githubusercontent.com/holoviz/panel/98389a8dead125bcb7c60dc2c1564e112d89d3fa/doc/_static/logo_stacked_dark_theme.png",
 }
 
 
