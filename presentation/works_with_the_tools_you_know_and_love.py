@@ -1,17 +1,18 @@
+import holoviews as hv
 import panel as pn
-import param
 
-from shared import Configuration
 import components
+from shared import Configuration
 
 RAW_CSS = """
 .bk-root *.bk-btn {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
 }
 """
 
 pn.extension("vega", "deckgl", "echarts", "plotly", "vtk", sizing_mode="stretch_width")
+hv.extension("bokeh")
 
 config = Configuration(
     title="Works with the tools you know and love",
@@ -19,39 +20,24 @@ config = Configuration(
     random=True,
 )
 
-altair = components.Altair()
-bokeh = components.Bokeh()
-deckgl = components.DeckGL()
-echarts = components.ECharts()
-holoviews = components.HoloViews()
-hvplot = components.HVPlot()
-matplotlib = components.Matplotlib()
-plotly = components.Plotly()
-plotnine = components.Plotnine()
-pydeck = components.PyDeck()
-pyecharts = components.PyECharts()
-pyvista = components.PyVista()
-seaborn = components.Seaborn()
-vega = components.Vega()
-vtk = components.VTK()
-
-TOOLS = {
-    "ALTAIR": altair,
-    "BOKEH": bokeh,
-    "DECKGL": deckgl,
-    "ECHARTS": echarts,
-    "HOLOVIEWS": holoviews,
-    "HVPLOT": hvplot,
-    # "ipywidget": # ipywidget,
-    "MATPLOTLIB": matplotlib,
-    "PLOTLY": plotly,
-    "PLOTNINE": plotnine,
-    "PYDECK": pydeck,
-    "PYECHARTS": pyecharts,
-    "PYVISTA": pyvista,
-    "SEABORN": seaborn,
-    "VEGA": vega,
-    "VTK": vtk,
+PLOTS = {
+    "ALTAIR": components.Altair(),
+    "BOKEH": components.Bokeh(),
+    "DATASHADER": components.DeckGL(),
+    "DECKGL": components.Datashader(),
+    "ECHARTS": components.ECharts(),
+    "FOLIUM": components.Folium(),
+    "HOLOVIEWS": components.HoloViews(),
+    "HVPLOT": components.HVPlot(),
+    "MATPLOTLIB": components.Matplotlib(),
+    "PLOTLY": components.Plotly(),
+    "PLOTNINE": components.Plotnine(),
+    "PYDECK": components.PyDeck(),
+    "PYECHARTS": components.PyECharts(),
+    "PYVISTA": components.PyVista(),
+    "SEABORN": components.Seaborn(),
+    "VEGA": components.Vega(),
+    "VTK": components.VTK(),
 }
 
 description = """
@@ -62,17 +48,17 @@ description = """
 
 
 def show(component="Altair"):
-    component = TOOLS[component]
+    component = PLOTS[component]
     return component.example(theme=config.theme, accent_base_color=config.accent_base_color)
 
 
 def reference(component="Altair"):
-    component = TOOLS[component]
+    component = PLOTS[component]
     return f"[Reference Guide]({ component.reference })"
 
 
 def code(component="Altair"):
-    component = TOOLS[component]
+    component = PLOTS[component]
     value = component.code(accent_base_color=config.accent_base_color)
 
     return pn.widgets.Ace(
@@ -86,7 +72,7 @@ def code(component="Altair"):
 
 
 select = pn.widgets.RadioButtonGroup(
-    options=list(TOOLS.keys()), button_type="success", margin=(10, 0, 25, 0)
+    options=list(PLOTS.keys()), button_type="success", margin=(10, 0, 25, 0)
 )
 try:
     pn.state.location.sync(select, {"value": "component"})

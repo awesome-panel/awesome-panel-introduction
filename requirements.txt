@@ -18,3 +18,8 @@ pydeck
 pyecharts
 vtk
 pyvista
+xarray
+pooch
+datashader
+folium
+pytest
