@@ -32,9 +32,9 @@ class CodeTyper(pn.viewable.Viewer):
         self._terminal = pn.pane.Markdown("$ ", margin=(0,25), background="#25282c", style={"color": "white"}, height=75)
         self._layout = pn.Column(
             pn.Column(
-                pn.pane.Markdown("# Make Seaborn Interactive with PANEL", style={"color": "white"}),
+                pn.pane.Markdown("# Easy Cross Filtering with Panel and HoloViews", style={"color": "white"}),
                 pn.Row(pn.pane.SVG(SVG, margin=7), pn.Spacer(), background="#25282c", height=30, margin=0),
-                pn.pane.Markdown("&nbsp; &nbsp; `seaborn_interactive.py`", background="#25282c", margin=0, style={"color": "white"}),
+                pn.pane.Markdown("&nbsp; &nbsp; `cross_filter.py`", background="#25282c", margin=0, style={"color": "white"}),
                 self._ace,
                 pn.Row(pn.Spacer()),
                 pn.Column(self._terminal,background="#25282c", margin=0),
@@ -66,35 +66,42 @@ class CodeTyper(pn.viewable.Viewer):
         return self._layout
 
 SCRIPT = """\
-import seaborn as sns
-
-sns.set_style("whitegrid")
-penguins = sns.load_dataset("penguins")
-
-def func(input="green"):
-    plot = sns.displot(penguins, x="flipper_length_mm", color=input, legend=False)
-    fig0 = plot.fig
-    fig0.set_size_inches(11, 8)
-    return fig0
-
+import holoviews as hv
+import hvplot.pandas
 import panel as pn
+from bokeh.sampledata.iris import flowers
 
-pn.extension()
+pn.extension(sizing_mode="stretch_width")
+hv.extension("bokeh")
 
-select = pn.widgets.Select(value="#6082A2", options=["#a2a160", "#6082A2", "#a26061"])
+accent_color = "#ff286e"
 
-interactive_func=pn.bind(func, input=select)
+scatter = flowers.hvplot.scatter(
+    x="sepal_length", y="sepal_width", c=accent_color, responsive=True, height=350
+)
+hist = flowers.hvplot.hist("petal_width", c=accent_color, responsive=True, height=350)
+
+scatter.opts(size=10)
+
+selection_linker = hv.selection.link_selections.instance()
+
+scatter = selection_linker(scatter)
+hist = selection_linker(hist)
+
+scatter.opts(tools=["hover"], active_tools=["box_select"])
+hist.opts(tools=["hover"], active_tools=["box_select"])
 
 pn.template.FastListTemplate(
-    site="Panel", title="Works With The Tools You Know And Love",
-    sidebar=[select], main=[interactive_func],
-    header_background="#6082A2", accent_base_color="#6082A2"
+    site="Awesome Panel and HoloViews",
+    title="Cross Filtering",
+    header_background=accent_color,
+    main=[scatter, hist],
 ).servable()"""
 
 COMMAND="""
-panel serve seaborn_interactive.py.py --autoreload --show
+panel serve cross_filter.py --autoreload --show
 
-Panel app running at: http://localhost:5006/seaborn_interactive
+Panel app running at: http://localhost:5006/cross_filter
 """
 
 CodeTyper(value=SCRIPT, command=COMMAND).servable()

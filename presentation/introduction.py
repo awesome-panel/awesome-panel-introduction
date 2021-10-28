@@ -22,12 +22,11 @@ pn.extension(sizing_mode="stretch_width")
 
 
 
-config = Configuration(title="Introduction", url="introduction", random=True)
+config = Configuration(title="Introduction to Panel", url="introduction", random=True)
 
 top = f"""
-# { config.site }
+# Works with the tools you know and love! ❤️
 
-## Beautiful and Powerful too! ❤️💪
 """
 
 gif = pn.pane.PNG(
@@ -38,7 +37,7 @@ gif = pn.pane.PNG(
     embed=False,
     sizing_mode="fixed",
     align="center",
-    margin=25,
+    margin=0,
 )
 
 bottom = pn.pane.Markdown(
@@ -47,7 +46,8 @@ This presentation is of course **made with Panel**. You can find the code on **G
 [marcskovmadsen/awesome-panel-introduction]\
 (https://github.com/marcskovmadsen/awesome-panel-introduction).
 
-For more about Panel check out [Panel](https://panel.holoviz.org/index.html), [Discourse](https://discourse.holoviz.org/), [Github](https://github.com/holoviz/panel), [awesome-panel.org](https://awesome-panel.org), [Awesome List](https://awesome-panel.org/awesome-list)"""
+**Marc Skov Madsen, PhD, CFA®**, [Orsted](https://orsted.com/), [datamodelsanalytics.com](https://datamodelsanalytics.com/), [awesome-panel.org](https://awesome-panel.org), [awesome-streamlit.org](https://awesome-streamlit.org).
+"""
 )
 
 component = pn.Column(top, gif, bottom, sizing_mode="stretch_both")

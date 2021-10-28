@@ -15,7 +15,7 @@ def get_component_explorer(config, description, components):
 
     def reference(component):
         component = components[component]
-        return f"[Panel Reference Guide]({ component.reference }), [Docs]({ component.docs })"
+        return f"[Reference]({ component.reference }), [Docs]({ component.docs })"
 
 
     def code(component):

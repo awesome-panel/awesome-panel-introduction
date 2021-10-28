@@ -14,7 +14,8 @@ air = xr.tutorial.open_dataset("air_temperature").load().air
 
 class Datashader(ComponentBase):
     component = param.Parameter(pn.pane.HoloViews)
-    reference = param.String("https://panel.holoviz.org/reference/panes/HoloViews.html")
+    reference = param.String("https://datashader.org/")
+    docs = param.String("https://datashader.org/")
     imports = """\
 import hvplot.xarray  # noqa
 import panel as pn
@@ -52,6 +53,7 @@ air = xr.tutorial.open_dataset("air_temperature").load().air
 class HoloViews(ComponentBase):
     component = param.Parameter(pn.pane.HoloViews)
     reference = param.String("https://panel.holoviz.org/reference/panes/HoloViews.html")
+    docs = param.String("https://holoviews.org/")
     imports = """\
 import holoviews as hv
 import numpy as np
@@ -96,6 +98,7 @@ hv.extension("bokeh")
 class HVPlot(ComponentBase):
     component = param.Parameter(pn.pane.HoloViews)
     reference = param.String("https://panel.holoviz.org/reference/panes/HoloViews.html")
+    docs = param.String("https://hvplot.holoviz.org/")
     imports = """\
 import hvplot.pandas  # noqa
 import panel as pn
@@ -122,13 +125,58 @@ pn.extension(sizing_mode="stretch_width")
         component = pn.pane.HoloViews(plot, height=500, sizing_mode="stretch_both")
         return component
 
+class Param(ComponentBase):
+    component = param.Parameter(pn.pane.HoloViews)
+    reference = param.String("https://panel.holoviz.org/user_guide/APIs.html#parameterized-classes")
+    docs = param.String("https://param.holoviz.org/")
+    imports = """\
+import param
+import panel as pn
+
+pn.extension(sizing_mode="stretch_width")
+"""
+
+    def example(self, theme="default", accent_base_color="blue"):
+        class Adder(param.Parameterized):
+
+            a = param.Number(default=0, bounds=(0, 1))
+
+            b = param.Integer(default=0, bounds=(0, 10))
+
+            @param.depends('a', 'b')
+            def output(self):
+                return f'# {self.a} + {self.b} = {self.a+self.b:.1f}'
+
+
+        adder = Adder(a=1,b=2)
+        adder_widgets = pn.Param(adder)
+        component = pn.Column(
+            adder_widgets, adder.output
+        )
+        return component
+
+class Panel(ComponentBase):
+    component = param.Parameter(pn)
+    reference = param.String("https://panel.holoviz.org")
+    docs = param.String("https://panel.holoviz.org")
+    imports = """\
+import panel as pn
+
+pn.extension(sizing_mode="stretch_width")
+"""
+
+    def example(self, theme="default", accent_base_color="blue"):
+        return pn.pane.Video(
+            "https://cdn.jsdelivr.net/gh/MarcSkovMadsen/awesome-panel-assets@2805bc7/awesome-panel/applications/classic-dashboard.mp4",
+            height=400, sizing_mode="fixed"
+        )
 
 ALL = {
-    # "COLORCET": HVPlot,
-    "DATASHADER": Datashader,
-    # "GEOVIEWS": HVPlot,
     "HOLOVIEWS": HoloViews,
     "HVPLOT": HVPlot,
-    # "PANEL": HVPlot,
-    # "PARAM": HVPlot,
+    "DATASHADER": Datashader,
+    "PARAM": Param,
+    "PANEL": Panel,
+    # "COLORCET": Colorcet,
+    # "GEOVIEWS": HVPlot,
 }

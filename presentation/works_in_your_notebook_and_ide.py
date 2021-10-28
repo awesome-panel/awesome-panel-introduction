@@ -164,7 +164,14 @@ vs_code = pn.pane.PNG(
     height=400, width=781,
     sizing_mode="scale_height",
     align="center",
-    name="VS Code",
+    name="VS Code .ipynb",
+)
+
+vs_code2 = pn.pane.HTML("""
+<div style="margin: 0 auto; height: 400px">
+<video controls="" src="https://blog.holoviz.org/images/autoreload.mp4" height="400"></video>
+</div>
+""", align="center", name="VS Code .py"
 )
 
 jupyter = pn.pane.PNG(
@@ -205,6 +212,6 @@ pn.template.FastListTemplate(
     main=[
         pn.Row(text, config.get_logo_pane(width=100)),
         image_component,
-        pn.Tabs(component, code_component, jupyter, colab, vs_code, pycharm, dynamic=True, sizing_mode="stretch_both"),
+        pn.Tabs(jupyter, colab, vs_code, vs_code2, pycharm, component, code_component, dynamic=True, sizing_mode="stretch_both"),
     ],
 ).servable()

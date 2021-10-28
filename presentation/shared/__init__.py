@@ -56,7 +56,7 @@ _mock_panel()
 
 class Configuration(param.Parameterized):
     theme = param.String()
-    site = param.String(default="Highly Interactive Data Apps with Panel")
+    site = param.String(default="Panel@PyData 2021")
     title = param.String()
     url = param.String()
     logo = param.String()

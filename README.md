@@ -32,8 +32,10 @@ If you are developing the presentation you can add the `--autoreload` flag.
 Please note
 
 - the app is optimized for a screen size of 1980x1024.
-- On Windows `cmd.exe` with not *expand* `*.py`. You will have to use powershell, git bash or expand the list manually.
+- On Windows `cmd.exe` will not *expand* `presentation/*.py` into a list of files. You will have to expand the list of apps manually
 
 ```bash
-panel serve presentation/introduction.py ...
+panel serve presentation/introduction.py seaborn_typer.py ...
 ```
+
+or use powershell, wsl, git bash or similar.
