@@ -25,9 +25,12 @@ pn.extension(sizing_mode="stretch_width")
 config = Configuration(title="Introduction to Panel", url="introduction", random=True)
 
 top = f"""
-# Powerful Data Science Apps 💪
+# Powerful Python Apps and Dashboards 💪
 
 ## Works with the tools you know and love! ❤️
+
+### Solves BI, Analysis, Engineering, Science, Data Science, ML use cases. And more 🧰
+
 
 """
 
