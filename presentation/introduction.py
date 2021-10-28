@@ -25,7 +25,9 @@ pn.extension(sizing_mode="stretch_width")
 config = Configuration(title="Introduction to Panel", url="introduction", random=True)
 
 top = f"""
-# Works with the tools you know and love! ❤️
+# Powerful Data Science Apps 💪
+
+## Works with the tools you know and love! ❤️
 
 """
 
