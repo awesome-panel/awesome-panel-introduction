@@ -132,3 +132,4 @@ Dockerfile
 videos/
 !assets/videos
 .vscode/settings.json
+Panel_Overview.ipynb

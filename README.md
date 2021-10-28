@@ -1,7 +1,5 @@
 # 👍 Awesome Panel - Introduction to Panel
 
-THIS REPO IS WORK IN PROGRESS. PRE-ALPHA
-
 [Panel](https://panel.holoviz.org) is a very powerful framework for exploratory data analysis and for creating beautiful data science apps in Python.
 
 This repository contains code and other material to support introductory talks, training and videos on Panel.
@@ -26,5 +24,16 @@ jupyter serverextension enable panel.io.jupyter_server_extension
 ## Run the presentation
 
 ```bash
-panel serve presentation/*.py --autoreload
+panel serve presentation/*.py
+```
+
+If you are developing the presentation you can add the `--autoreload` flag.
+
+Please note
+
+- the app is optimized for a screen size of 1980x1024.
+- On Windows `cmd.exe` with not *expand* `*.py`. You will have to use powershell, git bash or expand the list manually.
+
+```bash
+panel serve presentation/introduction.py ...
 ```

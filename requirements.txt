@@ -23,3 +23,5 @@ pooch
 datashader
 folium
 pytest
+ipysheet==0.4.4
+ipydatagrid

@@ -27,28 +27,27 @@ config = Configuration(title="Introduction", url="introduction", random=True)
 top = f"""
 # { config.site }
 
-## Beautiful and Powerful too! ❤️💪"""
+## Beautiful and Powerful too! ❤️💪
+"""
 
 gif = pn.pane.PNG(
-    config.logo,
+    "https://github.com/MarcSkovMadsen/awesome-panel-introduction/blob/main/assets/videos/awesome-panel-introduction-tour.gif?raw=true",
     height=422,
-    width=500,
+    width=786,
     link_url="https://panel.holoviz.org",
     embed=False,
-    sizing_mode="scale_height",
+    sizing_mode="fixed",
     align="center",
     margin=25,
 )
 
 bottom = pn.pane.Markdown(
-    f"""**Marc Skov Madsen**, PhD, CFA®, [datamodelsanalytics.com](https://datamodelsanalytics.com),
-[marc.skov.madsen@gmail.com](mailto:marc.skov.madsen@gmail)
-
+    f"""
 This presentation is of course **made with Panel**. You can find the code on **Github** at
 [marcskovmadsen/awesome-panel-introduction]\
 (https://github.com/marcskovmadsen/awesome-panel-introduction).
 
-For more about Panel check out my site [awesome-panel.org](https://awesome-panel.org)"""
+For more about Panel check out [Panel](https://panel.holoviz.org/index.html), [Discourse](https://discourse.holoviz.org/), [Github](https://github.com/holoviz/panel), [awesome-panel.org](https://awesome-panel.org), [Awesome List](https://awesome-panel.org/awesome-list)"""
 )
 
 component = pn.Column(top, gif, bottom, sizing_mode="stretch_both")
