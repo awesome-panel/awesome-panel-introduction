@@ -20,7 +20,7 @@ For more inspiration check out my site [awesome-panel.org](https://awesome-panel
 
 James A. Bednar, Adrien Treuille, Nicolas Kruchten, Marc Skov Madsen, Sylvain Corlay  |  10/28/2021 2:00 PM UTC - 10/28/2021 4:00 PM
 
-[Agenda](https://pydata.org/global2021/schedule/presentation/140/python-dashboarding-shootout-and-showdown/), [Video | Panel Introduction 24:00 | Shootout 1:15:08](https://zoom.us/rec/share/ailBm48NBppFXaNHvU2EsnSGf3XhR8Q9mzmhUnwqkwDXS_bRlYMRgnQvudc7UeY_.pAZHOxu7L2Yl6Fr0?startTime=1635430012000), [Git Release](https://github.com/MarcSkovMadsen/awesome-panel-introduction/releases/tag/v1).
+[Agenda](https://pydata.org/global2021/schedule/presentation/140/python-dashboarding-shootout-and-showdown/), [Video | Panel Introduction 24:00 | Shootout 1:15:08](https://zoom.us/rec/share/ailBm48NBppFXaNHvU2EsnSGf3XhR8Q9mzmhUnwqkwDXS_bRlYMRgnQvudc7UeY_.pAZHOxu7L2Yl6Fr0?startTime=1635430012000), [Git Release | v1](https://github.com/MarcSkovMadsen/awesome-panel-introduction/releases/tag/v1).
 
 For years, Python lagged behind other languages when it came to building interactive web applications. Python now has at least four full-featured, solid frameworks focused on dashboards and similar apps: Dash, Panel, Streamlit, and Voila+IPyWidgets. We'll hear presentations from proponents of each library, and then have a spirited debate and discussion: Which one is best for which purpose?
 
